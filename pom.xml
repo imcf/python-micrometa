@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>23.2.0</version>
+		<relativePath />
+	</parent>
+
+	<groupId>ch.unibas.biozentrum.imcf</groupId>
+	<artifactId>python-imcf-libs</artifactId>
+	<version>13.0.1-SNAPSHOT</version>
+
+	<name>IMCF-Libs</name>
+	<description>
+		Python libraries provided by the Imaging Core Facility (IMCF),
+		Biozentrum, University of Basel, Switzerland.
+	</description>
+	<url>https://github.com/imcf/fiji-imcf-libs/</url>
+	<inceptionYear>2013</inceptionYear>
+	<organization>
+		<name>University of Basel</name>
+		<url>http://www.unibas.ch/</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>GNU General Public License (GPL) v3+</name>
+			<url>https://www.gnu.org/licenses/gpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<build>
+		<!-- The following filtering rule allows to automatically have the
+		project version added to the Python package's `__init__.py` file by
+		placing the string '${project.version}' somewhere in that file. -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/__init__.py</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/__init__.py</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+
+	<developers>
+		<!-- See https://imagej.net/Team -->
+		<developer>
+			<id>Ehrenfeu</id>
+			<name>Niko Ehrenfeuchter</name>
+			<url>https://imagej.net/User:Ehrenfeu</url>
+			<roles>
+				<role>founder</role>
+				<role>lead</role>
+				<role>developer</role>
+				<role>debugger</role>
+				<role>reviewer</role>
+				<role>support</role>
+				<role>maintainer</role>
+			</roles>
+		</developer>
+	</developers>
+	<contributors>
+		<!--
+		NB: Need at least one element to override the parent.
+		See: https://issues.apache.org/jira/browse/MNG-5220
+		-->
+		<contributor>
+			<name>None</name>
+		</contributor>
+	</contributors>
+
+	<mailingLists>
+		<mailingList>
+			<name>Image.sc Forum</name>
+			<archive>https://forum.image.sc/</archive>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+		<connection>scm:git:git://github.com/imcf/fiji-imcf-libs</connection>
+		<developerConnection>scm:git:git@github.com:imcf/fiji-imcf-libs</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/imcf/fiji-imcf-libs</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/imcf/fiji-imcf-libs/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>None</system>
+	</ciManagement>
+
+	<properties>
+		<license.licenseName>gpl_v3</license.licenseName>
+		<license.copyrightOwners>University of Basel, Switzerland</license.copyrightOwners>
+		<maven.source.skip>true</maven.source.skip>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>imagej.public</id>
+			<url>http://maven.imagej.net/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>ij</artifactId>
+		</dependency>
+	</dependencies>
+</project>
