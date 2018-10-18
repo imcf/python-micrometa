@@ -263,7 +263,7 @@ class ImageDataOlympus(ImageData):
         tileno_y = self.supplement['tileno'][1]
         pos_x = size_x * ratio * tileno_x
         pos_y = size_y * ratio * tileno_y
-        log.info("Setting relative position: %s, %s.", pos_x, pos_y)
+        log.debug("Setting relative position: %s, %s.", pos_x, pos_y)
         self.position['relative'] = (pos_x, pos_y)
 
 
@@ -539,7 +539,7 @@ class ImageDataOIR(ImageDataOlympus):
         except:
             log.error('Error parsing dimensions from %s!', self.storage['full'])
             raise
-        log.warn("Parsed dimensions: %s", self._dim)
+        log.info("Parsed dimensions: %s", self._dim)
 
     def _parse_frameprops(self, xml):
         """Parse X/Y dimensions and bit-depth from frameProperties XML."""

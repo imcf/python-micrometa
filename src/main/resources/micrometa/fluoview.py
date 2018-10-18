@@ -47,7 +47,7 @@ class FluoView3kMosaic(MosaicExperiment):
         tree : xml.etree.ElementTree
             The parsed XML element tree.
         """
-        log.warn("Creating FluoView3kMosaic object from [%s]...", infile)
+        log.info("Creating FluoView3kMosaic object from [%s]...", infile)
         super(FluoView3kMosaic, self).__init__(infile)
         # define the XML namespaces / prefix map:
         self.tile_size = {
@@ -65,7 +65,7 @@ class FluoView3kMosaic(MosaicExperiment):
         self.mosaictrees = self.find_matrix_roi_groups()
         if runparser:
             self.add_mosaics()
-        log.warn("FluoView3kMosaic initialization completed.")
+        log.debug("FluoView3kMosaic initialization completed.")
 
     def validate_xml(self):
         """Check XML for being a valid FluoView 3000 mosaic experiment.
@@ -80,7 +80,7 @@ class FluoView3kMosaic(MosaicExperiment):
         tree : xml.etree.ElementTree
         """
         rt_expected = '{%s/protocol/matl/model/matl}properties' % self.ns_base
-        log.warn('Validating FluoView 3000 MATL XML (%s)', self.infile['full'])
+        log.debug('Validating FluoView 3000 MATL XML (%s)', self.infile['full'])
         tree = etree.parse(self.infile['full'])
         root = tree.getroot()
         log.debug('Checking XML root tag to be "%s"', rt_expected)
@@ -127,7 +127,7 @@ class FluoView3kMosaic(MosaicExperiment):
                 log.debug('Group %s is a Mosaic ROI.', grp.attrib['objectId'])
                 matrix_groups.append(grp)
 
-        log.warn("Found %i Matrix ROIs (tiling datasets).", len(matrix_groups))
+        log.info("Found %i Matrix ROIs (tiling datasets).", len(matrix_groups))
         return matrix_groups
 
     def add_mosaics(self):
@@ -172,7 +172,7 @@ class FluoView3kMosaic(MosaicExperiment):
         tfi = lambda t, p: int(tft(t, p))
 
         oid = tree.attrib['objectId']
-        log.warn('Processing ROI group %s...', oid)
+        log.info('Processing ROI group %s...', oid)
 
         # investigate the ROI info section ("marker:regionInfo")
         roii = tree.find('marker:regionInfo', self.xmlns)
@@ -277,7 +277,7 @@ class FluoView3kMosaic(MosaicExperiment):
             fname = tft(tree, 'matl:image')
             grid_x = tfi(tree, 'matl:xIndex')
             grid_y = tfi(tree, 'matl:yIndex')
-            log.info('File "%s" grid position: %s / %s', fname, grid_x, grid_y)
+            log.debug('File "%s" grid position: %s / %s', fname, grid_x, grid_y)
             subvol_ds = ImageDataOIR(self.infile['path'] + fname)
             # we don't have the stage coordinates anywhere, so set them to None:
             subvol_ds.set_stagecoords((None, None))
@@ -293,8 +293,8 @@ class FluoView3kMosaic(MosaicExperiment):
             log.error('Error parsing XML from OIR: %s', err)
             raise IOError(err)
 
-        log.warn('Parsed area "%s", position: %s',
-                 fname, subvol_ds.position['relative'])
+        log.info('Parsed "%s", positions: grid=[%s/%s] relative=%s',
+                 fname, grid_x, grid_y, subvol_ds.position['relative'])
         return subvol_ds
 
 
@@ -394,7 +394,7 @@ class FluoViewMosaic(MosaicExperiment):
     def find_mosaictrees(self):
         """Locate potential mosaics within the XML tree."""
         trees = self.tree.getroot().findall('Mosaic')
-        log.warn("Found %i potential mosaics in XML.", len(trees))
+        log.info("Found %i potential mosaics in XML.", len(trees))
         return trees
 
     def add_mosaics(self):
