@@ -652,7 +652,7 @@ class MosaicDataCuboid(MosaicData):
         self.overlap = 0
         self.overlap_units = 'px'
 
-    def set_overlap(self, value, units='px'):
+    def set_overlap(self, value, units='pct'):
         """Set the overlap amount and unit."""
         log.debug('Setting overlap to %s %s.', value, units)
         units_allowed = ['px', 'pct', 'um', 'nm', 'mm']
