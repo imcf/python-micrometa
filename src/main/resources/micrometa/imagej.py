@@ -99,7 +99,8 @@ def write_all_tile_configs(experiment, outdir=''):
         write_tile_config(mosaic_ds, outdir)
 
 
-def locate_templates(tplpath):
+def locate_templates(tplpath=''):
+    """Locate path to templates, possibly in a .zip or .jar file."""
     # by default templates are expected in a subdir of the current package:
     if tplpath == '':
         tplpath = join(dirname(__file__), 'ijm_templates')
