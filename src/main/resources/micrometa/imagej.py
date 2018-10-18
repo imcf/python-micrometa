@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """ImageJ related stuff like reading measurement results, etc."""
 
 # TODO: consider creating a generic superclass for macro templates, providing
@@ -9,10 +7,9 @@
 from os import listdir
 from os.path import join, dirname, basename, splitext
 
-from log import log
-from misc import readtxt
-
 from . import __version__
+from .iotools import readtxt
+from .log import LOG as log
 from .pathtools import exists
 
 

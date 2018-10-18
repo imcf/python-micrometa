@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """Helper functions to work with filenames."""
 
 import platform
@@ -86,14 +84,3 @@ if platform.python_implementation() == 'Jython':
     exists = jython_fiji_exists
 else:
     exists = os.path.exists
-
-
-if __name__ == "__main__":
-    # pylint: disable-msg=W0611
-    # pylint: disable-msg=W0406
-    print 'Running doctest on file "%s".' % __file__
-    import doctest
-    import sys
-    from . import pathtools
-    VERB = '-v' in sys.argv
-    doctest.testmod(verbose=VERB)
