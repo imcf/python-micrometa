@@ -462,11 +462,3 @@ class FluoViewMosaic(MosaicExperiment):
         else:
             log.warn('Mosaic %s: incomplete subvolumes, SKIPPING!', index)
             log.warn('First incomplete/missing subvolume: %s', subvol_fname)
-
-
-if __name__ == "__main__":
-    print 'Running doctest on file "%s".' % __file__
-    import doctest
-    import sys
-    VERB = '-v' in sys.argv
-    doctest.testmod(verbose=VERB)
