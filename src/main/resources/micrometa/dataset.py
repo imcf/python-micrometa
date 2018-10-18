@@ -658,9 +658,10 @@ class MosaicDataCuboid(MosaicData):
         units_allowed = ['px', 'pct', 'um', 'nm', 'mm']
         if units not in units_allowed:
             raise TypeError('Unknown overlap unit given: %s' % units)
-        # TODO: this warning should be displayed for other units as well
         if units == 'pct' and value <= 5.0:
             log.warn('Low overlap %.1f%%!', value)
+        elif units != 'pct':
+            log.warn('Minimum overlap check not implemented for "%s"!', units)
         self.overlap = value
         self.overlap_units = units
 
