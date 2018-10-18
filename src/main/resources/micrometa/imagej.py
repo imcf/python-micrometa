@@ -9,9 +9,8 @@
 from os import listdir
 from os.path import join, dirname, basename, splitext
 
-from misc import readtxt
-
 from . import __version__
+from .iotools import readtxt
 from .log import LOG as log
 from .pathtools import exists
 
