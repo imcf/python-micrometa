@@ -239,7 +239,7 @@ class FluoView3kMosaic(MosaicExperiment):
                 log.debug("Trying to parse sub-volume %s", area)
                 mosaic_ds.add_subvol(self.parse_area(area))
             except IOError as err:
-                msg = 'Group <%s> has broken image data: %s' % (oid, err)
+                msg = 'Group has broken image data: %s' % err
                 log.error(msg)
                 log.info('Corresponding XML section:\n----\n%s\n----',
                          etree.tostring(area, 'utf-8'))
@@ -247,7 +247,7 @@ class FluoView3kMosaic(MosaicExperiment):
             except Exception as err:  # pylint: disable=broad-except
                 # catching all other *exceptions* like this is fine since we
                 # anyway just skip this mosaic entirely in that case:
-                msg = 'Group <%s>: unexpected parsing error: %s' % (oid, err)
+                msg = 'Unexpected parsing error: %s' % err
                 log.error(msg)
                 log.info('Corresponding XML section:\n----\n%s\n----',
                          etree.tostring(area, 'utf-8'))
