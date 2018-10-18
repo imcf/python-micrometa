@@ -72,4 +72,4 @@ def flatten(lst):
     flat = ""
     for line in lst:
         flat += line
-    return(flat)
+    return flat

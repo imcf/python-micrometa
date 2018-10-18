@@ -41,14 +41,14 @@ def filehandle(fname, mode='r'):
     <type 'file'>
     """
     log.debug(type(fname))
-    if (type(fname).__name__ == 'str'):
+    if type(fname).__name__ == 'str':
         try:
             return open(fname, mode)
         except IOError as err:
             message = "can't open '%s': %s"
             raise SystemExit(message % (fname, err))
-    elif (type(fname).__name__ == 'file'):
-        if (fname.mode != mode):
+    elif type(fname).__name__ == 'file':
+        if fname.mode != mode:
             message = "mode mismatch: %s != %s"
             raise IOError(message % (fname.mode, mode))
         return fname
@@ -98,9 +98,9 @@ def readtxt(fname, path='', flat=False):
     else:
         fin = open(join(path, fname), 'r')
     txt = fin.readlines()  # returns file as a list, one entry per line
-    if (flat):
+    if flat:
         txt = flatten(txt)
     fin.close()
-    if (zipread is not None):
+    if zipread is not None:
         zipread.close()
-    return(txt)
+    return txt
