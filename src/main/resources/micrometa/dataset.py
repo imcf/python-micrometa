@@ -294,7 +294,7 @@ class ImageDataOIF(ImageDataOlympus):
         Use the 'codecs' package to set up a ConfigParser object that can
         properly handle the UTF-16 encoded .oif files.
         """
-        # TODO: investigate usage of 'io' package instead of 'codecs'
+        # NOTE: consider using of 'io' package instead of 'codecs'
         oif = self.storage['full']
         log.info('Parsing OIF file: %s', oif)
         try:
@@ -353,7 +353,7 @@ class ImageDataOIB(ImageDataOlympus):
         oibinfo = 'OibInfo.txt'
         encoding = 'utf16'
         expected_version = '2.0.0.0'
-        # TODO: investigate usage of 'io' package instead of 'codecs'
+        # NOTE: consider using of 'io' package instead of 'codecs'
         oib = self.storage['full']
         log.info('Parsing OIB file: %s', oib)
         try:

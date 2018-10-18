@@ -1,6 +1,6 @@
 """ImageJ related stuff like reading measurement results, etc."""
 
-# TODO: consider creating a generic superclass for macro templates, providing
+# NOTE: consider creating a generic superclass for macro templates, providing
 # the methods required for all templates and derived subclasses that contain a
 # required method that adds the specific variables-setting code.
 
@@ -70,7 +70,7 @@ def write_tile_config(mosaic_ds, outdir=''):
 
     Parameters
     ----------
-    mosaic_ds : volpy.dataset.MosaicData
+    mosaic_ds : dataset.MosaicData
         The mosaic dataset to write the tile config for.
     outdir : str
         The output directory, if empty the input directory is used.
