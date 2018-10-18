@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """Helper functions to work with filenames."""
 
 import platform

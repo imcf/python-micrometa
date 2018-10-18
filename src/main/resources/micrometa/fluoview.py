@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Tools to process data produced with Olympus FluoView."""
 
 import xml.etree.ElementTree as etree

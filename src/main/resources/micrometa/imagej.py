@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """ImageJ related stuff like reading measurement results, etc."""
 
 # TODO: consider creating a generic superclass for macro templates, providing

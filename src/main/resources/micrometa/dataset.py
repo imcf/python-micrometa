@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """Classes to handle various types of datasets."""
 
 import codecs

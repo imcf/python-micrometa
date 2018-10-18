@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """Tools to process microscopy experiment data."""
 
 from .log import LOG as log
