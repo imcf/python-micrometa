@@ -3,8 +3,8 @@
 """Tools to process data produced with Olympus FluoView."""
 
 import xml.etree.ElementTree as etree
-from log import log
 
+from .log import LOG as log
 from .experiment import MosaicExperiment
 from .dataset import MosaicDataCuboid, ImageDataOIF, ImageDataOIB, ImageDataOIR
 

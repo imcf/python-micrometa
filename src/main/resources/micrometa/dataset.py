@@ -11,7 +11,7 @@ from StringIO import StringIO
 
 import olefile
 
-from log import log
+from .log import LOG as log
 from .pathtools import parse_path, exists
 
 

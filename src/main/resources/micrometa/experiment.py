@@ -2,7 +2,7 @@
 
 """Tools to process microscopy experiment data."""
 
-from log import log
+from .log import LOG as log
 from .pathtools import parse_path
 
 
