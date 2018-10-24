@@ -23,7 +23,7 @@ def gen_tile_config(mosaic_ds):
 
     Parameters
     ----------
-    mosaic_ds : volpy.dataset.MosaicData
+    mosaic_ds : micrometa.dataset.MosaicData
         The mosaic dataset to generate the tile config for.
 
     Returns
@@ -140,7 +140,7 @@ def gen_stitching_macro_code(experiment, pfx, path='', tplpath='', opts={}):
 
     Parameters
     ----------
-    experiment : volpy.experiment.MosaicExperiment
+    experiment : micrometa.experiment.MosaicExperiment
         The object containing all information about the mosaic.
     pfx : str
         The prefix for the two template files, will be completed with the
