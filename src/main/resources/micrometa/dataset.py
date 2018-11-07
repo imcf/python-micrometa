@@ -2,10 +2,16 @@
 
 import codecs
 import string    # bug #2481 pylint: disable=deprecated-module
-# import io
 import ConfigParser
 import xml.etree.ElementTree as etree
 from StringIO import StringIO
+
+# when using the package in ImageJ's Jython environment we're apparently facing
+# a namespace / import order conflict, as "io" will refer to the Java package of
+# the same name when being imported by the "olefile" package below, whereas it
+# is working fine if we explicitly import "io" here, despite never using it
+# ourselves - once this is resolved (in ImageJ) the import can be removed!
+import io  # pylint: disable=unused-import
 
 import olefile
 
