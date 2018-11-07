@@ -137,8 +137,8 @@ class FluoView3kMosaic(MosaicExperiment):
                 self.add_mosaic(tree, i)
             except ValueError as err:
                 log.warn('Skipping mosaic %s: %s', i, err)
-            except RuntimeError:
-                log.warn('Error parsing mosaic from group %s, SKIPPING!', i)
+            except RuntimeError as err:
+                log.warn('Error parsing mosaic %s, SKIPPING: %s', i, err)
                 continue
 
     def add_mosaic(self, tree, index=-1):
