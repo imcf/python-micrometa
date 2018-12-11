@@ -13,7 +13,7 @@ from .log import LOG as log
 from .pathtools import exists
 
 
-def gen_tile_config(mosaic_ds):
+def gen_tile_config(mosaic_ds, sort=True):
     """Generate a tile configuration for Fiji's stitcher.
 
     Generate a layout configuration file for a ceartain mosaic in the format
@@ -25,6 +25,12 @@ def gen_tile_config(mosaic_ds):
     ----------
     mosaic_ds : micrometa.dataset.MosaicData
         The mosaic dataset to generate the tile config for.
+    sort : bool
+        If set to True the sequence of tiles in the configuration will be
+        re-ordered to be line-wise from bottom-right to top-left. This is mostly
+        intended for being used with specific fusion methods of the
+        Grid/Collection stitcher, e.g. the "Random input tile" where the order
+        of the tiles affects the fusion result.
 
     Returns
     -------
@@ -47,16 +53,35 @@ def gen_tile_config(mosaic_ds):
         coord_format = '(%f, %f)\n'
     conf.append('# Define the image coordinates (in pixels)\n')
     log.debug("Mosaic storage path: %s", mosaic_ds.storage['path'])
+    tiles = list()
     for vol in mosaic_ds.subvol:
-        vol_fname = vol.storage['full']
+        fname = vol.storage['full']
         # convert path to subvolumes to be relative to mosaic file:
-        if vol_fname.startswith(mosaic_ds.storage['path']):
-            vol_fname = vol_fname[len(mosaic_ds.storage['path']):]
-        line = '%s; ; ' % vol_fname
+        if fname.startswith(mosaic_ds.storage['path']):
+            fname = fname[len(mosaic_ds.storage['path']):]
         # always use forward slashes as path separator (works on all OS!)
-        line = line.replace('\\', '/')
-        line += coord_format % vol.position['relative']
+        fname = fname.replace('\\', '/')
+        pos = vol.position['relative']
+
+        if subvol_position_dim > 2:
+            tiles.append([fname, pos[0], pos[1]], pos[2])
+        else:
+            tiles.append([fname, pos[0], pos[1]])
+
+    if sort:
+        tiles = sorted(sorted(tiles, key=lambda x: x[1], reverse=True),
+                       key=lambda x: x[2], reverse=True)
+
+    for tile_details in tiles:
+        line = '%s; ; ' % tile_details[0]
+        if subvol_position_dim > 2:
+            line += coord_format % (tile_details[1],
+                                    tile_details[2],
+                                    tile_details[3])
+        else:
+            line += coord_format % (tile_details[1], tile_details[2])
         conf.append(line)
+
     return conf
 
 
