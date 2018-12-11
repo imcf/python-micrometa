@@ -60,7 +60,7 @@ def gen_tile_config(mosaic_ds):
     return conf
 
 
-def write_tile_config(mosaic_ds, outdir=''):
+def write_tile_config(mosaic_ds, outdir='', padlen=0):
     """Generate and write the tile configuration file.
 
     Call the function to generate the corresponding tile configuration and
@@ -73,12 +73,14 @@ def write_tile_config(mosaic_ds, outdir=''):
         The mosaic dataset to write the tile config for.
     outdir : str
         The output directory, if empty the input directory is used.
+    padlen : int
+        An optional padding length for the index number used in the resulting
+        file name, e.g. '2' will result in names like 'mosaic_01.txt' and so on.
     """
     log.info('write_tile_config(%i)', mosaic_ds.supplement['index'])
     config = gen_tile_config(mosaic_ds)
-    # TODO: add some padding mechanism to the experiment/dataset classes
-    # fname = 'mosaic_%0*i.txt' % (len(str(len(mosaic_ds))))
-    fname = 'mosaic_%s.txt' % mosaic_ds.supplement['index']
+    fname = 'mosaic_%0' + str(padlen) + 'i.txt'
+    fname = fname % mosaic_ds.supplement['index']
     if outdir == '':
         fname = join(mosaic_ds.storage['path'], fname)
     else:
@@ -94,8 +96,10 @@ def write_all_tile_configs(experiment, outdir=''):
 
     All arguments are directly passed on to write_tile_config().
     """
+    padlen = len(str(len(experiment)))
+    log.debug("Padding tile configuration file indexes to length %i", padlen)
     for mosaic_ds in experiment:
-        write_tile_config(mosaic_ds, outdir)
+        write_tile_config(mosaic_ds, outdir, padlen)
 
 
 def locate_templates(tplpath=''):
