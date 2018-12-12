@@ -1,3 +1,7 @@
-target/
+# VS Code files
 .vscode/
 *.code-workspace
+
+# Maven build / release files
+pom.xml.releaseBackup
+target/
