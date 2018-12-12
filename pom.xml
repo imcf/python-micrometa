@@ -11,7 +11,7 @@
 
 	<groupId>ch.unibas.biozentrum.imcf</groupId>
 	<artifactId>python-imcf-libs</artifactId>
-	<version>13.0.1-SNAPSHOT</version>
+	<version>13.1.0</version>
 
 	<name>IMCF-Libs</name>
 	<description>
@@ -91,7 +91,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/imcf/fiji-imcf-libs</connection>
 		<developerConnection>scm:git:git@github.com:imcf/fiji-imcf-libs</developerConnection>
-		<tag>HEAD</tag>
+		<tag>python-imcf-libs-13.1.0</tag>
 		<url>https://github.com/imcf/fiji-imcf-libs</url>
 	</scm>
 	<issueManagement>
