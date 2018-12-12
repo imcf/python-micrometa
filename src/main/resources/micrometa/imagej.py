@@ -13,7 +13,7 @@ from .log import LOG as log
 from .pathtools import exists
 
 
-def gen_tile_config(mosaic_ds, sort=True):
+def gen_tile_config(mosaic_ds, sort=True, suffix=''):
     """Generate a tile configuration for Fiji's stitcher.
 
     Generate a layout configuration file for a ceartain mosaic in the format
@@ -31,6 +31,11 @@ def gen_tile_config(mosaic_ds, sort=True):
         intended for being used with specific fusion methods of the
         Grid/Collection stitcher, e.g. the "Random input tile" where the order
         of the tiles affects the fusion result.
+    suffix : str, optional
+        An optional suffix to use for the file names in the tile config instead
+        of the original one. Can be used if the workflow requires a
+        pre-processing step before the actual stitching where results will be
+        stored e.g. as ICS files or similar.
 
     Returns
     -------
@@ -61,6 +66,17 @@ def gen_tile_config(mosaic_ds, sort=True):
             fname = fname[len(mosaic_ds.storage['path']):]
         # always use forward slashes as path separator (works on all OS!)
         fname = fname.replace('\\', '/')
+        if suffix:
+            try:
+                # remove everything up to the last dot:
+                fname = fname[:fname.rindex('.') + 1]
+                # now append the new suffix:
+                fname += suffix
+            except ValueError:
+                msg = "File name doesn't contain a dot: %s" % fname
+                log.error(msg)
+                raise ValueError(msg)
+
         pos = vol.position['relative']
 
         if subvol_position_dim > 2:
@@ -85,7 +101,7 @@ def gen_tile_config(mosaic_ds, sort=True):
     return conf
 
 
-def write_tile_config(mosaic_ds, outdir='', padlen=0):
+def write_tile_config(mosaic_ds, outdir='', padlen=0, suffix=''):
     """Generate and write the tile configuration file.
 
     Call the function to generate the corresponding tile configuration and
@@ -98,12 +114,14 @@ def write_tile_config(mosaic_ds, outdir='', padlen=0):
         The mosaic dataset to write the tile config for.
     outdir : str
         The output directory, if empty the input directory is used.
-    padlen : int
+    padlen : int, optional
         An optional padding length for the index number used in the resulting
         file name, e.g. '2' will result in names like 'mosaic_01.txt' and so on.
+    suffix : str, optional
+        An optional suffix to be passed on to the gen_tile_config() call.
     """
     log.info('write_tile_config(%i)', mosaic_ds.supplement['index'])
-    config = gen_tile_config(mosaic_ds)
+    config = gen_tile_config(mosaic_ds, suffix=suffix)
     fname = 'mosaic_%0' + str(padlen) + 'i.txt'
     fname = fname % mosaic_ds.supplement['index']
     if outdir == '':
@@ -116,7 +134,7 @@ def write_tile_config(mosaic_ds, outdir='', padlen=0):
     log.warn('Wrote tile config to %s', out.name)
 
 
-def write_all_tile_configs(experiment, outdir=''):
+def write_all_tile_configs(experiment, outdir='', suffix=''):
     """Wrapper to generate all TileConfiguration.txt files.
 
     All arguments are directly passed on to write_tile_config().
@@ -124,7 +142,7 @@ def write_all_tile_configs(experiment, outdir=''):
     padlen = len(str(len(experiment)))
     log.debug("Padding tile configuration file indexes to length %i", padlen)
     for mosaic_ds in experiment:
-        write_tile_config(mosaic_ds, outdir, padlen)
+        write_tile_config(mosaic_ds, outdir, padlen, suffix)
 
 
 def locate_templates(tplpath=''):
