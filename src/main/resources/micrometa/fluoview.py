@@ -295,6 +295,21 @@ class FluoView3kMosaic(MosaicExperiment):
                  fname, grid_x, grid_y, subvol_ds.position['relative'])
         return subvol_ds
 
+    def summarize(self):
+        """Generate human readable details about the parsed mosaics."""
+        # NOTE: should be moved to abstract superclass
+        failcount = len(self.mosaictrees) - len(self)
+        msg = "Parsed %i mosaics from the FluoView project.\n\n" % len(self)
+        if failcount > 0:
+            msg += ("\n==== WARNING ====== WARNING ====\n\n"
+                    "Parsing failed on %i mosaic(s). Missing files?\n "
+                    "\n==== WARNING ====== WARNING ====\n\n\n" % failcount)
+        for mos in self:
+            msg += "Mosaic %i: " % mos.supplement['index']
+            msg += "%i x %i tiles, " % (mos.dim['X'], mos.dim['Y'])
+            msg += "%.1f%% overlap.\n" % mos.get_overlap()
+        return msg
+
 
 class FluoViewMosaic(MosaicExperiment):
 
@@ -458,3 +473,18 @@ class FluoViewMosaic(MosaicExperiment):
         else:
             log.warn('Mosaic %s: incomplete subvolumes, SKIPPING!', index)
             log.warn('First incomplete/missing subvolume: %s', subvol_fname)
+
+    def summarize(self):
+        """Generate human readable details about the parsed mosaics."""
+        # NOTE: should be moved to abstract superclass
+        failcount = len(self.mosaictrees) - len(self)
+        msg = "Parsed %i mosaics from the FluoView project.\n\n" % len(self)
+        if failcount > 0:
+            msg += ("\n==== WARNING ====== WARNING ====\n\n"
+                    "Parsing failed on %i mosaic(s). Missing files?\n "
+                    "\n==== WARNING ====== WARNING ====\n\n\n" % failcount)
+        for mos in self:
+            msg += "Mosaic %i: " % mos.supplement['index']
+            msg += "%i x %i tiles, " % (mos.dim['X'], mos.dim['Y'])
+            msg += "%.1f%% overlap.\n" % mos.get_overlap()
+        return msg
