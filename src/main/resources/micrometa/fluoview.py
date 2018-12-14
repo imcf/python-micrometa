@@ -154,7 +154,6 @@ class FluoView3kMosaic(MosaicExperiment):
         mosaic_ds.supplement['index'] = index
         self.add_dataset(mosaic_ds)
 
-
     def parse_mosaic(self, tree):
         """Parse an XML subtree and create a MosaicDataset from it.
 
@@ -211,7 +210,6 @@ class FluoView3kMosaic(MosaicExperiment):
         mosaic_ds.supplement['oid'] = oid
         mosaic_ds.supplement['gid'] = gid
         return mosaic_ds
-
 
     def assemble_mosaic_ds(self, areas, count):
         """Assemble a MosaicDataCuboid from the related area subtrees.
