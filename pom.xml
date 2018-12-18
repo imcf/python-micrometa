@@ -10,15 +10,14 @@
 	</parent>
 
 	<groupId>ch.unibas.biozentrum.imcf</groupId>
-	<artifactId>python-imcf-libs</artifactId>
+	<artifactId>python-micrometa</artifactId>
 	<version>15.0.0-SNAPSHOT</version>
 
-	<name>IMCF-Libs</name>
+	<name>MicroMeta</name>
 	<description>
-		Python libraries provided by the Imaging Core Facility (IMCF),
-		Biozentrum, University of Basel, Switzerland.
+		Python package for processing metadata from various light-microscopy related data formats.
 	</description>
-	<url>https://github.com/imcf/fiji-imcf-libs/</url>
+	<url>https://github.com/imcf/python-micrometa/</url>
 	<inceptionYear>2013</inceptionYear>
 	<organization>
 		<name>University of Basel</name>
@@ -33,22 +32,29 @@
 	</licenses>
 
 	<build>
+		<!-- Tell maven where to find the files to be packaged. Since the code
+		to be packaged is not mavenized itself but this is rather re-packaging
+		of non-Java code (hence not following the project layout conventions) we
+		need to do this explicitly. -->
+
 		<!-- The following filtering rule allows to automatically have the
 		project version added to the Python package's `__init__.py` file by
 		placing the string '${project.version}' somewhere in that file. -->
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>src</directory>
 				<filtering>true</filtering>
 				<includes>
 					<include>**/__init__.py</include>
 				</includes>
 			</resource>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>src</directory>
 				<filtering>false</filtering>
 				<excludes>
 					<exclude>**/__init__.py</exclude>
+					<exclude>**/*.pyc</exclude>
+					<exclude>**/__pycache__/</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -89,14 +95,14 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:git://github.com/imcf/fiji-imcf-libs</connection>
-		<developerConnection>scm:git:git@github.com:imcf/fiji-imcf-libs</developerConnection>
+		<connection>scm:git:git://github.com/imcf/python-micrometa</connection>
+		<developerConnection>scm:git:git@github.com:imcf/python-micrometa</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://github.com/imcf/fiji-imcf-libs</url>
+		<url>https://github.com/imcf/python-micrometa</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/imcf/fiji-imcf-libs/issues</url>
+		<url>https://github.com/imcf/python-micrometa/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>None</system>
