@@ -1,7 +1,8 @@
 """Tools to process microscopy experiment data."""
 
+from imcflibs.pathtools import parse_path
+
 from .log import LOG as log
-from .pathtools import parse_path
 
 
 class Experiment(list):

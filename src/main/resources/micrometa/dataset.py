@@ -15,8 +15,9 @@ import io  # pylint: disable=unused-import
 
 import olefile
 
+from imcflibs.pathtools import parse_path, exists
+
 from .log import LOG as log
-from .pathtools import parse_path, exists
 
 
 class DataSet(object):  # pylint: disable=too-few-public-methods

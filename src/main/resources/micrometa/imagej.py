@@ -7,10 +7,11 @@
 from os import listdir
 from os.path import join, dirname, basename, splitext
 
+from imcflibs.iotools import readtxt
+from imcflibs.pathtools import exists
+
 from . import __version__
-from .iotools import readtxt
 from .log import LOG as log
-from .pathtools import exists
 
 
 def gen_tile_config(mosaic_ds, sort=True, suffix=''):
