@@ -4,6 +4,8 @@
 
 [//]: # (end-badges)
 
+## Microscopy Metadata processing :coffee: :snake: :microscope:
+
 A Python package to process metadata from various light-microscopy related data
 formats. Supports generating [ImageJ][1] macros for stitching mosaics / tilings.
 Developed and provided by the [Imaging Core Facility (IMCF)][imcf] of the
