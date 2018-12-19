@@ -1,1 +1,1 @@
-:coffee: :snake: :microscope: A bunch of Python modules and packages mavenized for ImageJ2.
+:coffee: :snake: :microscope: Package for processing metadata from various light-microscopy related data formats.
