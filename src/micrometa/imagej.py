@@ -102,7 +102,7 @@ def gen_tile_config(mosaic_ds, sort=True, suffix=''):
     return conf
 
 
-def write_tile_config(mosaic_ds, outdir='', padlen=0, suffix=''):
+def write_tile_config(mosaic, outdir='', padlen=0, suffix=''):
     """Generate and write the tile configuration file.
 
     Call the function to generate the corresponding tile configuration and
@@ -111,7 +111,7 @@ def write_tile_config(mosaic_ds, outdir='', padlen=0, suffix=''):
 
     Parameters
     ----------
-    mosaic_ds : dataset.MosaicData
+    mosaic : dataset.MosaicData
         The mosaic dataset to write the tile config for.
     outdir : str
         The output directory, if empty the input directory is used.
@@ -121,12 +121,12 @@ def write_tile_config(mosaic_ds, outdir='', padlen=0, suffix=''):
     suffix : str, optional
         An optional suffix to be passed on to the gen_tile_config() call.
     """
-    log.info('write_tile_config(%i)', mosaic_ds.supplement['index'])
-    config = gen_tile_config(mosaic_ds, suffix=suffix)
+    log.info('write_tile_config(%i)', mosaic.supplement['index'])
+    config = gen_tile_config(mosaic, suffix=suffix)
     fname = 'mosaic_%0' + str(padlen) + 'i.txt'
-    fname = fname % mosaic_ds.supplement['index']
+    fname = fname % (mosaic.supplement['index'])
     if outdir == '':
-        fname = join(mosaic_ds.storage['path'], fname)
+        fname = join(mosaic.storage['path'], fname)
     else:
         fname = join(outdir, fname)
     with open(fname, 'w') as out:
