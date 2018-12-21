@@ -129,10 +129,9 @@ def write_tile_config(mosaic_ds, outdir='', padlen=0, suffix=''):
         fname = join(mosaic_ds.storage['path'], fname)
     else:
         fname = join(outdir, fname)
-    out = open(fname, 'w')
-    out.writelines(config)
-    out.close()
-    log.warn('Wrote tile config to %s', out.name)
+    with open(fname, 'w') as out:
+        out.writelines(config)
+        log.warn('Wrote tile config to %s', out.name)
 
 
 def write_all_tile_configs(experiment, outdir='', suffix=''):
