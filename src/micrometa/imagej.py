@@ -123,8 +123,8 @@ def write_tile_config(mosaic, outdir='', padlen=0, suffix=''):
     """
     log.info('write_tile_config(%i)', mosaic.supplement['index'])
     config = gen_tile_config(mosaic, suffix=suffix)
-    fname = 'mosaic_%0' + str(padlen) + 'i.txt'
-    fname = fname % (mosaic.supplement['index'])
+    fname = 'mosaic_%0' + str(padlen) + 'i%s.txt'
+    fname = fname % (mosaic.supplement['index'], suffix)
     if outdir == '':
         fname = join(mosaic.storage['path'], fname)
     else:
