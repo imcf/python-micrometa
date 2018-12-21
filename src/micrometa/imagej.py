@@ -97,7 +97,7 @@ def gen_tile_config(mosaic, sort=True, suffix='', force_2d=False):
     return conf
 
 
-def write_tile_config(mosaic, outdir='', padlen=0, suffix=''):
+def write_tile_config(mosaic, outdir='', padlen=0, suffix='', force_2d=False):
     """Generate and write the tile configuration file.
 
     Call the function to generate the corresponding tile configuration and
@@ -115,9 +115,11 @@ def write_tile_config(mosaic, outdir='', padlen=0, suffix=''):
         file name, e.g. '2' will result in names like 'mosaic_01.txt' and so on.
     suffix : str, optional
         An optional suffix to be passed on to the gen_tile_config() call.
+    force_2d : bool, optional (default=False)
+        See gen_tile_config() for details.
     """
     log.info('write_tile_config(%i)', mosaic.supplement['index'])
-    config = gen_tile_config(mosaic, suffix=suffix)
+    config = gen_tile_config(mosaic, suffix=suffix, force_2d=force_2d)
     fname = 'mosaic_%0' + str(padlen) + 'i%s.txt'
     fname = fname % (mosaic.supplement['index'], suffix)
     if outdir == '':
@@ -129,7 +131,7 @@ def write_tile_config(mosaic, outdir='', padlen=0, suffix=''):
         log.warn('Wrote tile config to %s', out.name)
 
 
-def write_all_tile_configs(experiment, outdir='', suffix=''):
+def write_all_tile_configs(experiment, outdir='', suffix='', force_2d=False):
     """Wrapper to generate all TileConfiguration.txt files.
 
     All arguments are directly passed on to write_tile_config().
@@ -137,7 +139,7 @@ def write_all_tile_configs(experiment, outdir='', suffix=''):
     padlen = len(str(len(experiment)))
     log.debug("Padding tile configuration file indexes to length %i", padlen)
     for mosaic_ds in experiment:
-        write_tile_config(mosaic_ds, outdir, padlen, suffix)
+        write_tile_config(mosaic_ds, outdir, padlen, suffix, force_2d)
 
 
 def locate_templates(tplpath=''):
