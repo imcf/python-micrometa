@@ -143,7 +143,20 @@ def write_all_tile_configs(experiment, outdir='', suffix='', force_2d=False):
 
 
 def locate_templates(tplpath=''):
-    """Locate path to templates, possibly in a .zip or .jar file."""
+    """Locate path to templates, possibly in a .zip or .jar file.
+
+    Parameters
+    ----------
+    tplpath : str, optional
+        The path to a directory or a .zip / .jar file containing the template
+        files (the default is '', which will result in the current directory
+        being searched for a subdirectory with the name 'ijm_templates').
+
+    Returns
+    -------
+    tplpath : str
+        The path to a directory or .zip / .jar file containing the templates.
+    """
     # by default templates are expected in a subdir of the current package:
     if tplpath == '':
         tplpath = join(dirname(__file__), 'ijm_templates')
@@ -151,9 +164,9 @@ def locate_templates(tplpath=''):
         if not exists(tplpath):
             tplpath += '.zip'
             log.debug('Looking for template directory: %s', tplpath)
-    # extended magic to look for templates in jar files having a version number
-    # (and possibly a 'SNAPSHOT' part in their filename) without having to
-    # hard-code those strings here:
+    # some logic to look for templates in jar files having a version number and
+    # possibly a 'SNAPSHOT' part in their filename without having to hard-code
+    # those strings here:
     if tplpath.lower().endswith('.jar'):
         candidates = list()
         jar_dir = dirname(tplpath)
