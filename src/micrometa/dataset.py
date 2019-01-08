@@ -111,7 +111,7 @@ class ImageData(DataSet):
             'Y': 0,
             'Z': 0
         }
-        self.position = {      # spatial information for multi-image datasets
+        self.position = {     # spatial information for multi-image datasets
             'stage': None,    # raw stage coordinates
             'relative': None  # relative coordinates in pixel values (float)
         }
@@ -630,10 +630,10 @@ class MosaicData(DataSet):
         """
         log.debug('Dataset type: %s', type(img_ds))
         self.subvol.append(img_ds)
-    
+
     def files_and_coords(self, sort=False):
         """Get a list of filenames and coordinates of the mosaic subvolumes.
-        
+
         Parameters
         ----------
         sort : bool, optional
@@ -642,7 +642,7 @@ class MosaicData(DataSet):
             being used with specific fusion methods of Fiji's Grid/Collection
             stitcher, e.g. the "Random input tile" where the order of the tiles
             affects the fusion result.
-        
+
         Returns
         -------
         list(list(str, list(float)))
@@ -661,18 +661,18 @@ class MosaicData(DataSet):
             try:
                 tiles.append([fname,
                               [pos[0], pos[1], pos[2]]
-                              ])
+                             ])
             except IndexError:
                 tiles.append([fname,
                               [pos[0], pos[1]]
-                              ])
+                             ])
 
         if sort:
             # first sort by the 1st element of the coordinates, followed by
             # sorting by the 2nd element:
             tiles = sorted(sorted(tiles, key=lambda x: x[1][0], reverse=True),
-                        key=lambda x: x[1][1], reverse=True)
-        
+                           key=lambda x: x[1][1], reverse=True)
+
         return tiles
 
 
