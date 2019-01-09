@@ -31,7 +31,7 @@ function get_tileconfig_files(dir) {
      * Scan a directory for files matching a certain pattern and assemble a
      * new array with the filenames.
      */
-    pattern = 'mosaic_[0-9]+\.txt';
+    pattern = 'mosaic_[0-9]+.*\.txt';
     filelist = getFileList(dir);
     tileconfigs = newArray(filelist.length);
     ti = 0;  // the tileconfig index
