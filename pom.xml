@@ -57,6 +57,10 @@
 					<exclude>**/__pycache__/</exclude>
 				</excludes>
 			</resource>
+			<resource>
+				<!-- ImageJ macro templates -->
+				<directory>resources</directory>
+			</resource>
 		</resources>
 	</build>
 
