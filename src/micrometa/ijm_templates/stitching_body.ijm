@@ -40,7 +40,10 @@ for (i = 0; i < tileconfigs.length; i++) {
     preview_file = input_dir + '/' + ds_name + '_preview.jpg';
     param = tpl + "layout_file=[" + layout_file + "]";
     print(hr);
-    print("*** [" + name + "]: processing " + layout_file);
+    print("*** [" + name + "]");
+    print("*** processing [" + layout_file + "]");
+    print("*** preview file [" + preview_file + "]");
+    print("*** output file [" + export_file + "]");
     print("*** parameters used: " + param);
     run("Grid/Collection stitching", param);
 

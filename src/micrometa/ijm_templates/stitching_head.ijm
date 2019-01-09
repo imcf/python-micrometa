@@ -78,10 +78,11 @@ function bioformats_export(filename, layout_file) {
         bfexp += "write_each_z_section ";
     }
     bfexp += "compression=Uncompressed";
-    print("*** [" + name + "]: finished " + layout_file);
-    print("*** Exporting to: " + filename);
+    print("*** [" + name + "]");
+    print("*** finished [" + layout_file + "]");
+    print("*** exporting to [" + filename + "]");
     run("Bio-Formats Exporter", bfexp);
-    print("*** Finished exporting to: " + filename);
+    print("*** finished exporting to:\n\n" + filename + "\n");
 }
 
 
