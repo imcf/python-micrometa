@@ -60,6 +60,9 @@
 			<resource>
 				<!-- ImageJ macro templates -->
 				<directory>resources</directory>
+				<excludes>
+					<exclude>testdata/</exclude>
+				</excludes>
 			</resource>
 		</resources>
 	</build>

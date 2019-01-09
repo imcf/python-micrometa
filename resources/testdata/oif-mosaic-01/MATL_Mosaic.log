@@ -1,0 +1,55 @@
+<XYStage>
+	<XAxisDirection>LeftToRight</XAxisDirection>
+	<YAxisDirection>TopToBottom</YAxisDirection>
+	<NumberOfMosaics>1</NumberOfMosaics>
+	<Repeats>1</Repeats>
+	<Version>1.1</Version>
+	<ProjectionFolder Path="Relative">\Projection</ProjectionFolder>
+	<AppendFolder Path="Relative">\Append</AppendFolder>
+	<AppendProjectionFolder Path="Relative">\AppendProjection</AppendProjectionFolder><Mosaic No="1">
+		<Stitch>True</Stitch>
+		<XScanDirection>LeftToRight</XScanDirection>
+		<YScanDirection>TopToBottom</YScanDirection>
+		<XIndex>269.30</XIndex>
+		<YIndex>269.30</YIndex>
+		<IndexRatio>85</IndexRatio>
+		<XImages>2</XImages>
+		<YImages>2</YImages>
+		<ImageInfo>
+			<No>1</No>
+			<XPos>7790.45</XPos>
+			<YPos>-11777.45</YPos>
+			<Xno>0</Xno>
+			<Yno>0</Yno>
+			<Status>True</Status>
+			<Filename>Slide1sec001\Slide1sec001.oif</Filename>
+		</ImageInfo>
+		<ImageInfo>
+			<No>2</No>
+			<XPos>8059.75</XPos>
+			<YPos>-11777.45</YPos>
+			<Xno>1</Xno>
+			<Yno>0</Yno>
+			<Status>True</Status>
+			<Filename>Slide1sec002\Slide1sec002.oif</Filename>
+		</ImageInfo>
+		<ImageInfo>
+			<No>3</No>
+			<XPos>7790.45</XPos>
+			<YPos>-12046.75</YPos>
+			<Xno>0</Xno>
+			<Yno>1</Yno>
+			<Status>True</Status>
+			<Filename>Slide1sec003\Slide1sec003.oif</Filename>
+		</ImageInfo>
+		<ImageInfo>
+			<No>4</No>
+			<XPos>8059.75</XPos>
+			<YPos>-12046.75</YPos>
+			<Xno>1</Xno>
+			<Yno>1</Yno>
+			<Status>True</Status>
+			<Filename>Slide1sec004\Slide1sec004.oif</Filename>
+		</ImageInfo>
+	</Mosaic>
+</XYStage>
