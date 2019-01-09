@@ -34,8 +34,8 @@
 	<build>
 		<!-- Tell maven where to find the files to be packaged. Since the code
 		to be packaged is not mavenized itself but this is rather re-packaging
-		of non-Java code (hence not following the project layout conventions) we
-		need to do this explicitly. -->
+		of non-Java code (hence not following the Java / Maven project layout
+		conventions) we need to do this explicitly. -->
 
 		<!-- The following filtering rule allows to automatically have the
 		project version added to the Python package's `__init__.py` file by
