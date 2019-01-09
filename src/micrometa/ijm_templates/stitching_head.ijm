@@ -110,6 +110,8 @@ function gen_preview_jpeg(jpeg_fname) {
     } else {
         run("Enhance Contrast...", "saturated=0.3");
     }
+    print("*** created JPEG preview: " + jpeg_fname);
+    saveAs("Jpeg", jpeg_fname);
 
     if (width > 1024 || height > 1024) {
         oldwidth = width;
@@ -124,8 +126,10 @@ function gen_preview_jpeg(jpeg_fname) {
         run("Scale...", "x=- y=- width=" + width + " height=" + height + " interpolation=None average");
         makeRectangle((oldwidth-width+1)/2, (oldheight-height+1)/2, width, height);
         run("Crop");
+        jpeg_fname = replace(jpeg_fname, '.jpg', '-1024.jpg');
+        print("*** created downscaled JPEG preview: " + jpeg_fname);
+        saveAs("Jpeg", jpeg_fname);
     }
-    saveAs("Jpeg", jpeg_fname);
     close();
 }
 
