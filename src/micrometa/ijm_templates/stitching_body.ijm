@@ -33,10 +33,11 @@ if (ignore_z_stage) {
 tileconfigs = get_tileconfig_files(input_dir);
 for (i = 0; i < tileconfigs.length; i++) {
     layout_file = tileconfigs[i];
-    export_file  = input_dir + '/';
-    export_file += replace(layout_file, '.txt', export_format);
-    preview_file = input_dir + '/';
-    preview_file += replace(layout_file, '.txt', '_preview.jpg');
+    ds_name = replace(layout_file, '.txt', '');
+    ds_name = replace(ds_name, '.ics', '');
+    ds_name = replace(ds_name, '.ids', '');
+    export_file  = input_dir + '/' + ds_name + export_format;
+    preview_file = input_dir + '/' + ds_name + '_preview.jpg';
     param = tpl + "layout_file=[" + layout_file + "]";
     print(hr);
     print("*** [" + name + "]: processing " + layout_file);
