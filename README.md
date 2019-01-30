@@ -4,6 +4,8 @@
 
 [//]: # (end-badges)
 
+[![Maven Build Status](https://travis-ci.com/imcf/python-micrometa.svg?branch=master)](https://travis-ci.com/imcf/python-micrometa)
+
 ## Microscopy Metadata processing :coffee: :snake: :microscope:
 
 A Python package to process metadata from various light-microscopy related data
