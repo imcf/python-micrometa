@@ -135,5 +135,10 @@
 			<artifactId>ij</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>ch.unibas.biozentrum.imcf</groupId>
+			<artifactId>python-imcflibs</artifactId>
+			<version>0.2.0</version>
+		</dependency>
 	</dependencies>
 </project>
