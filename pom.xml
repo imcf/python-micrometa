@@ -140,5 +140,10 @@
 			<artifactId>python-imcflibs</artifactId>
 			<version>0.2.0</version>
 		</dependency>
+		<dependency>
+			<groupId>ch.unibas.biozentrum.imcf</groupId>
+			<artifactId>jython-olefile</artifactId>
+			<version>0.46.2</version>
+		</dependency>
 	</dependencies>
 </project>
