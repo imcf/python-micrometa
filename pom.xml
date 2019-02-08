@@ -11,7 +11,7 @@
 
 	<groupId>ch.unibas.biozentrum.imcf</groupId>
 	<artifactId>python-micrometa</artifactId>
-	<version>15.0.1-SNAPSHOT</version>
+	<version>15.0.2-SNAPSHOT</version>
 
 	<name>MicroMeta</name>
 	<description>
