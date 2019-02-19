@@ -1,9 +1,5 @@
 """ImageJ related stuff like reading measurement results, etc."""
 
-# NOTE: consider creating a generic superclass for macro templates, providing
-# the methods required for all templates and derived subclasses that contain a
-# required method that adds the specific variables-setting code.
-
 from os import listdir
 from os.path import join, dirname, basename, splitext
 
