@@ -1,4 +1,10 @@
-"""ImageJ related stuff like reading measurement results, etc."""
+"""ImageJ related stuff like reading measurement results, etc.
+
+NOTE: This is EXCLUSIVELY intended for functions supporting ImageJ related
+operations, like creating stitcher configuration files or such. This package
+MUST NOT contain code that only runs WITHIN ImageJ itself, i.e. everything in
+the 'micrometa' package must run in plain CPython as well!
+"""
 
 from os import listdir
 from os.path import join, dirname, basename, splitext
