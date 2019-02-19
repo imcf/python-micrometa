@@ -3,8 +3,8 @@
 from os import listdir
 from os.path import join, dirname, basename, splitext
 
-import imcflibs
-from imcflibs.pathtools import exists
+import imcflibs  # pylint: disable-msg=import-error
+from imcflibs.pathtools import exists  # pylint: disable-msg=import-error
 
 from . import __version__
 from .log import LOG as log
