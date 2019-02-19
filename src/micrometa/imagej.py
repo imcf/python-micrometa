@@ -181,7 +181,7 @@ def locate_templates(tplpath=''):
     return tplpath
 
 
-def gen_stitching_macro(name, path, tplpfx, tplpath='', opts={}):
+def gen_stitching_macro(name, path, tplpfx, tplpath='', opts=None):
     """Generate code in ImageJ's macro language to stitch the mosaics.
 
     Take two template files ("head" and "body") and generate an ImageJ
@@ -228,8 +228,9 @@ def gen_stitching_macro(name, path, tplpfx, tplpath='', opts={}):
     path = path.replace('\\', '\\\\')
     ijm.append('input_dir="%s";\n' % path)
     ijm.append('use_batch_mode = true;\n')
-    for option, value in opts.items():
-        ijm.append('%s = %s;\n' % (option, value))
+    if opts:
+        for option, value in opts.items():
+            ijm.append('%s = %s;\n' % (option, value))
 
     ijm.append('\n')
     ijm.append("// =================== BEGIN macro BODY ===================\n")
