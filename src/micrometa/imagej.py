@@ -246,7 +246,7 @@ def gen_stitching_macro(name, path, tplpfx, tplpath='', opts=None):
     return ijm
 
 
-def write_stitching_macro(code, fname, dname):
+def write_stitching_macro(code, fname, dname=''):
     """Write generated macro code into a file.
 
     Parameters
@@ -255,10 +255,11 @@ def write_stitching_macro(code, fname, dname):
         The code as a list of strings, one per line.
     fname : str
         The desired output filename.
-    dname : str
-        The output directory.
+    dname : str (optional)
+        The output directory, will be joined with `fname` if specified.
     """
-    fname = join(dname, fname)
+    if dname:
+        fname = join(dname, fname)
     log.debug('Writing macro to output directory: "%s".', fname)
     with open(fname, 'w') as out:
         out.writelines(code)
