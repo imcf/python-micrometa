@@ -17,11 +17,21 @@ hr = "========================================";  // horizontal rule
 hr = hr + hr;
 
 
-function lpad(str) {
-    if (lengthOf("" + str) < 2) {
-        str = "0" + str;
+function lpadn(str, len) {
+	/* left-pad a string with zeros to a given total length n */
+	cur_len = lengthOf("" + str);
+    if (cur_len < len) {
+        for (i=0; i<(len-cur_len); i++) {
+            str = "0" + str;
+        }
     }
     return str;
+}
+
+
+function lpad(str) {
+    /* shortcut for padding to length of two */
+    return lpadn(str, 2);
 }
 
 
