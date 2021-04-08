@@ -11,7 +11,7 @@
 
 	<groupId>ch.unibas.biozentrum.imcf</groupId>
 	<artifactId>python-micrometa</artifactId>
-	<version>15.1.1-SNAPSHOT</version>
+	<version>15.2.0</version>
 
 	<name>MicroMeta</name>
 	<description>
@@ -101,7 +101,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/imcf/python-micrometa</connection>
 		<developerConnection>scm:git:git@github.com:imcf/python-micrometa</developerConnection>
-		<tag>HEAD</tag>
+		<tag>python-micrometa-15.2.0</tag>
 		<url>https://github.com/imcf/python-micrometa</url>
 	</scm>
 	<issueManagement>
