@@ -31,7 +31,8 @@ function lpadn(str, len) {
 
 function lpad(str) {
     /* shortcut for padding to length of two */
-    return lpadn(str, 2);
+    padded = lpadn(str, 2);
+    return padded;
 }
 
 
