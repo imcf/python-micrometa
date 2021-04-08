@@ -32,6 +32,7 @@ function lpadn(str, len) {
 function lpad(str) {
     /* shortcut for padding to length of two */
     padded = lpadn(str, 2);
+    // NOTE: using "return lpadn()" doesn't work in IJ macro!
     return padded;
 }
 
