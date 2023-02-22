@@ -2,7 +2,12 @@
 
 import codecs
 import string    # bug #2481 pylint: disable=deprecated-module
-import ConfigParser
+
+try:
+    import ConfigParser  # Python 2.x
+except ImportError:
+    from configparser import ConfigParser  # Python 3.x
+
 import xml.etree.ElementTree as etree
 from StringIO import StringIO
 
