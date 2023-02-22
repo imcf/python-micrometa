@@ -9,7 +9,11 @@ except ImportError:
     from configparser import ConfigParser  # Python 3.x
 
 import xml.etree.ElementTree as etree
-from StringIO import StringIO
+
+try:
+    from StringIO import StringIO  # Python 2.x
+except ImportError:
+    from io import StringIO  # Python 3.x
 
 # when using the package in ImageJ's Jython environment we're apparently facing
 # a namespace / import order conflict, as "io" will refer to the Java package of
