@@ -55,4 +55,4 @@ class MosaicExperiment(Experiment):
 
     def add_mosaics(self):
         """Abstract method to add mosaics to this experiment."""
-        raise NotImplementedError('add_mosaics() not implemented!')
+        raise NotImplementedError("add_mosaics() not implemented!")

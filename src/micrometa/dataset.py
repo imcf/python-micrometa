@@ -1,7 +1,7 @@
 """Classes to handle various types of datasets."""
 
 import codecs
-import string    # bug #2481 pylint: disable=deprecated-module
+import string  # bug #2481 pylint: disable=deprecated-module
 
 try:
     import ConfigParser  # Python 2.x
@@ -58,16 +58,16 @@ class DataSet(object):  # pylint: disable=too-few-public-methods
         supplement : dict
         """
         log.debug("Creating a 'Dataset' object.")
-        ds_type_allowed = ('mosaic', 'stack', 'single')
-        st_type_allowed = ('single', 'tree', 'sequence')
+        ds_type_allowed = ("mosaic", "stack", "single")
+        st_type_allowed = ("single", "tree", "sequence")
         if not ds_type in ds_type_allowed:
             raise TypeError("Illegal dataset type: %s." % ds_type)
         if not st_type in st_type_allowed:
             raise TypeError("Illegal storage type: %s." % st_type)
         self.ds_type = ds_type
         self.storage = parse_path(st_path)
-        self.storage['type'] = st_type
-        if st_type == 'single' and self.storage['fname'] == '':
+        self.storage["type"] = st_type
+        if st_type == "single" and self.storage["fname"] == "":
             raise TypeError("File name missing for storage type 'single'.")
         self.supplement = {}
 
@@ -113,36 +113,37 @@ class ImageData(DataSet):
         log.debug("ds_type: '%s'", self.ds_type)
         # TODO: convert "_dim" to property
         self._dim = {
-            'B': 0,  # bit depth
-            'C': 0,  # channels
-            'T': 0,  # timepoints
-            'X': 0,
-            'Y': 0,
-            'Z': 0
+            "B": 0,  # bit depth
+            "C": 0,  # channels
+            "T": 0,  # timepoints
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
         }
-        self.position = {     # spatial information for multi-image datasets
-            'stage': None,    # raw stage coordinates
-            'relative': None  # relative coordinates in pixel values (float)
+        self.position = {  # spatial information for multi-image datasets
+            "stage": None,  # raw stage coordinates
+            "relative": None,  # relative coordinates in pixel values (float)
         }
 
     def set_stagecoords(self, coords):
         """Set the stageinfo coordinates for this object."""
         log.debug("Setting stage coordinates: %s.", str(coords))
-        self.position['stage'] = coords
+        self.position["stage"] = coords
 
     def set_relpos(self, overlap):
         """Calculate the relative coordinates from the tile overlap."""
-        raise NotImplementedError('set_relpos() not implemented in base class')
+        raise NotImplementedError("set_relpos() not implemented in base class")
 
     def set_tilenumbers(self, tileno_x, tileno_y, tileno_z=None):
         """Set the tile index number in the supplementary informations."""
-        log.debug("Tile grid indices x / y / z: %s / %s / %s",
-                  tileno_x, tileno_y, tileno_z)
-        self.supplement['tileno'] = (tileno_x, tileno_y, tileno_z)
+        log.debug(
+            "Tile grid indices x / y / z: %s / %s / %s", tileno_x, tileno_y, tileno_z
+        )
+        self.supplement["tileno"] = (tileno_x, tileno_y, tileno_z)
 
     def get_dimensions(self):
         """Lazy parsing of the image dimensions."""
-        raise NotImplementedError('get_dimensions() not implemented!')
+        raise NotImplementedError("get_dimensions() not implemented!")
 
 
 class ImageDataOlympus(ImageData):
@@ -164,7 +165,7 @@ class ImageDataOlympus(ImageData):
 
         For inherited variables, see ImageData.
         """
-        super(ImageDataOlympus, self).__init__('stack', 'tree', st_path)
+        super(ImageDataOlympus, self).__init__("stack", "tree", st_path)
         self.storage = self.validate_filepath()
         self.parser = None  # needs to be done in the subclass
         self._dim = None  # override _dim to mark it as not yet known
@@ -190,12 +191,12 @@ class ImageDataOlympus(ImageData):
         storage : pathtools.parse_path
         """
         fpath = self.storage
-        ext = fpath['ext']
+        ext = fpath["ext"]
         log.debug("Validating file path: %s", fpath)
-        if not exists(fpath['full']):
-            fpath = parse_path(fpath['orig'].replace(ext, '_01' + ext))
-            log.debug("Trying next path: %s", fpath['full'])
-        if not exists(fpath['full']):
+        if not exists(fpath["full"]):
+            fpath = parse_path(fpath["orig"].replace(ext, "_01" + ext))
+            log.debug("Trying next path: %s", fpath["full"])
+        if not exists(fpath["full"]):
             raise IOError("Can't find file: %s" % fpath)
         return fpath
 
@@ -215,21 +216,22 @@ class ImageDataOlympus(ImageData):
             'B': int   # bit depth
         }
         """
-        log.debug("Parsing dimensions for [%s]...", self.storage['fname'])
+        log.debug("Parsing dimensions for [%s]...", self.storage["fname"])
         get = self.parser.get
         try:
-            dim_b = get(u'Reference Image Parameter', u'ValidBitCounts')
-            dim_x = get(u'Reference Image Parameter', u'ImageHeight')
-            dim_y = get(u'Reference Image Parameter', u'ImageWidth')
-            dim_z = get(u'Axis 3 Parameters Common', u'MaxSize')
-            axis_z = get(u'Axis 3 Parameters Common', u'AxisName')
-            dim_c = get(u'Axis 2 Parameters Common', u'MaxSize')
-            axis_c = get(u'Axis 2 Parameters Common', u'AxisName')
-            dim_t = get(u'Axis 4 Parameters Common', u'MaxSize')
-            axis_t = get(u'Axis 4 Parameters Common', u'AxisName')
+            dim_b = get(u"Reference Image Parameter", u"ValidBitCounts")
+            dim_x = get(u"Reference Image Parameter", u"ImageHeight")
+            dim_y = get(u"Reference Image Parameter", u"ImageWidth")
+            dim_z = get(u"Axis 3 Parameters Common", u"MaxSize")
+            axis_z = get(u"Axis 3 Parameters Common", u"AxisName")
+            dim_c = get(u"Axis 2 Parameters Common", u"MaxSize")
+            axis_c = get(u"Axis 2 Parameters Common", u"AxisName")
+            dim_t = get(u"Axis 4 Parameters Common", u"MaxSize")
+            axis_t = get(u"Axis 4 Parameters Common", u"AxisName")
         except ConfigParser.NoOptionError as err:
-            raise ValueError("Error parsing dimensions from %s: %s" %
-                             (self.storage['full'], err))
+            raise ValueError(
+                "Error parsing dimensions from %s: %s" % (self.storage["full"], err)
+            )
         # check if we got the right axis for Z/Ch/T, set to 0 otherwise:
         if not axis_z == u'"Z"':
             log.warn("WARNING: couldn't find Z axis in metadata!")
@@ -241,14 +243,14 @@ class ImageDataOlympus(ImageData):
             log.warn("WARNING: couldn't find timepoints in metadata!")
             dim_t = 0
         self._dim = {
-            'B': int(dim_b),  # bit depth
-            'C': int(dim_c),  # channels
-            'T': int(dim_t),  # timepoints
-            'X': int(dim_x),
-            'Y': int(dim_y),
-            'Z': int(dim_z)
+            "B": int(dim_b),  # bit depth
+            "C": int(dim_c),  # channels
+            "T": int(dim_t),  # timepoints
+            "X": int(dim_x),
+            "Y": int(dim_y),
+            "Z": int(dim_z),
         }
-        log.info('Parsed image dimensions: %s', self._dim)
+        log.info("Parsed image dimensions: %s", self._dim)
 
     def get_dimensions(self):
         """Lazy parsing of the image dimensions.
@@ -274,14 +276,14 @@ class ImageDataOlympus(ImageData):
         """
         log.debug("Calculating relative position from %s%% overlap...", overlap)
         ratio = (100.0 - overlap) / 100
-        size_x = self.get_dimensions()['X']
-        size_y = self.get_dimensions()['Y']
-        tileno_x = self.supplement['tileno'][0]
-        tileno_y = self.supplement['tileno'][1]
+        size_x = self.get_dimensions()["X"]
+        size_y = self.get_dimensions()["Y"]
+        tileno_x = self.supplement["tileno"][0]
+        tileno_y = self.supplement["tileno"][1]
         pos_x = size_x * ratio * tileno_x
         pos_y = size_y * ratio * tileno_y
         log.debug("Setting relative position: %s, %s.", pos_x, pos_y)
-        self.position['relative'] = (pos_x, pos_y)
+        self.position["relative"] = (pos_x, pos_y)
 
 
 class ImageDataOIF(ImageDataOlympus):
@@ -312,8 +314,8 @@ class ImageDataOIF(ImageDataOlympus):
         properly handle the UTF-16 encoded .oif files.
         """
         # NOTE: consider using of 'io' package instead of 'codecs'
-        oif = self.storage['full']
-        log.info('Parsing OIF file: %s', oif)
+        oif = self.storage["full"]
+        log.info("Parsing OIF file: %s", oif)
         try:
             conv = codecs.open(oif, "r", "utf16")
         except IOError:
@@ -321,7 +323,7 @@ class ImageDataOIF(ImageDataOlympus):
         parser = ConfigParser.RawConfigParser()
         parser.readfp(conv)
         conv.close()
-        log.debug('Finished parsing OIF file.')
+        log.debug("Finished parsing OIF file.")
         return parser
 
 
@@ -367,12 +369,12 @@ class ImageDataOIB(ImageDataOlympus):
         >>> ole = olefile.OleFileIO(PATH_TO_OIB_FILE)
         >>> ole = olefile.OleFileIO(PATH_TO_OIB_FILE, debug=True)
         """
-        oibinfo = 'OibInfo.txt'
-        encoding = 'utf16'
-        expected_version = '2.0.0.0'
+        oibinfo = "OibInfo.txt"
+        encoding = "utf16"
+        expected_version = "2.0.0.0"
         # NOTE: consider using 'io' package instead of 'codecs'
-        oib = self.storage['full']
-        log.info('Parsing OIB file: %s', oib)
+        oib = self.storage["full"]
+        log.info("Parsing OIB file: %s", oib)
         try:
             ole = olefile.OleFileIO(oib)
         except IOError as err:
@@ -388,21 +390,21 @@ class ImageDataOIB(ImageDataOlympus):
             raise UnicodeDecodeError("OIB has unexpected encoding: %s" % err)
         parser = ConfigParser.RawConfigParser()
         parser.readfp(StringIO(conv))
-        oibver = parser.get(u'OibSaveInfo', u'Version')
-        mainfile = parser.get(u'OibSaveInfo', u'MainFileName')
+        oibver = parser.get(u"OibSaveInfo", u"Version")
+        mainfile = parser.get(u"OibSaveInfo", u"MainFileName")
         if oibver != expected_version:
-            log.warn('WARNING: OIB has unknown format version %s!', oibver)
+            log.warn("WARNING: OIB has unknown format version %s!", oibver)
         else:
-            log.info('OIB Format Version: %s', oibver)
-        log.debug('Main File Name: %s', mainfile)
+            log.info("OIB Format Version: %s", oibver)
+        log.debug("Main File Name: %s", mainfile)
         stream.close()
-        log.info('Finished parsing OIB description file.')
+        log.info("Finished parsing OIB description file.")
         # replace stream and parser with the mainfile:
         stream = ole.openstream([mainfile])
         conv = codecs.decode(stream.read(), encoding)
         parser.readfp(StringIO(conv))
         # clean up and return the parser:
-        log.debug('Finished parsing OIB file.')
+        log.debug("Finished parsing OIB file.")
         stream.close()
         ole.close()
         return parser
@@ -434,12 +436,12 @@ class ImageDataOIR(ImageDataOlympus):
         log.debug("ImageDataOIR(%s)", st_path)
         super(ImageDataOIR, self).__init__(st_path)
         # XML namespace definitions required for parsers:
-        ns_base = 'http://www.olympus.co.jp/hpf'
+        ns_base = "http://www.olympus.co.jp/hpf"
         self._xmlns = {
-            'base': '%s/model/base' % ns_base,
-            'commonframe': '%s/model/commonframe' % ns_base,
-            'commonimage': '%s/model/commonimage' % ns_base,
-            'commonparam': '%s/model/commonparam' % ns_base,
+            "base": "%s/model/base" % ns_base,
+            "commonframe": "%s/model/commonframe" % ns_base,
+            "commonimage": "%s/model/commonimage" % ns_base,
+            "commonparam": "%s/model/commonparam" % ns_base,
         }
         self._xml = None
         log.debug("[DONE] creating ImageDataOIR(%s)", st_path)
@@ -451,7 +453,7 @@ class ImageDataOIR(ImageDataOlympus):
             log.debug("Lazy initialization of OIR, reading XML now...")
             self._xml = self._get_xml_sections()
         if self._xml is None:
-            msg = "unable to locate XML in %s!" % self.storage['fname']
+            msg = "unable to locate XML in %s!" % self.storage["fname"]
             log.error(msg)
             raise ValueError(msg)
         return self._xml
@@ -476,19 +478,19 @@ class ImageDataOIR(ImageDataOlympus):
         """
         count = 0
         size = 1048576  # set chunk size to be 1 MiB
-        collected = ''
+        collected = ""
         found = dict()
         search_tags = [
-            'lsmframe:frameProperties',
-            'lsmimage:imageProperties',
+            "lsmframe:frameProperties",
+            "lsmimage:imageProperties",
         ]
 
-        with open(self.storage['full'], 'rb') as fin:
+        with open(self.storage["full"], "rb") as fin:
             while True:
                 chunk = fin.read(size)
                 # raise an exception if we reach EOF and haven't found all tags:
                 if not chunk:
-                    log.debug("Read %s bytes in %s chunks.", count*size, count)
+                    log.debug("Read %s bytes in %s chunks.", count * size, count)
                     raise ValueError("Couldn't find all requested XML blocks!")
                 count += 1
 
@@ -500,28 +502,29 @@ class ImageDataOIR(ImageDataOlympus):
 
                     # if the sequence is below a minimum length or it doesn't
                     # contain an XML block discard it and proceed with next:
-                    if len(collected) < min_len or '<?xml' not in collected:
-                        collected = ''
+                    if len(collected) < min_len or "<?xml" not in collected:
+                        collected = ""
                         continue
 
                     # check if sequence contains any of the searched XML tags:
                     for tag in search_tags:
-                        if '<' + tag in collected:
-                            log.debug('Found <%s> XML section.', tag)
-                            xml_close = collected.rfind('>') + 1
+                        if "<" + tag in collected:
+                            log.debug("Found <%s> XML section.", tag)
+                            xml_close = collected.rfind(">") + 1
                             if len(collected) - xml_close > 0:
-                                log.debug('Stripping %s trailing chars: "%s"',
-                                          len(collected) - xml_close,
-                                          collected[xml_close:])
+                                log.debug(
+                                    'Stripping %s trailing chars: "%s"',
+                                    len(collected) - xml_close,
+                                    collected[xml_close:],
+                                )
                             found[tag] = collected[:xml_close]
                             # stop once all searched tags were found:
                             if len(found) == len(search_tags):
-                                log.debug('Stopping after %s bytes.',
-                                          count * size)
+                                log.debug("Stopping after %s bytes.", count * size)
                                 return found
 
                     # reset collected chars for next round:
-                    collected = ''
+                    collected = ""
         return None
 
     def _parse_dimensions(self):
@@ -541,20 +544,20 @@ class ImageDataOIR(ImageDataOlympus):
             'B': int   # bit depth
         }
         """
-        log.debug("Parsing dimensions for [%s]...", self.storage['fname'])
+        log.debug("Parsing dimensions for [%s]...", self.storage["fname"])
         self._dim = {
-            'X': 0,
-            'Y': 0,
-            'Z': 0,
-            'C': 0,  # channels
-            'B': 0,  # bit depth
-            'T': 0,  # timepoints
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "C": 0,  # channels
+            "B": 0,  # bit depth
+            "T": 0,  # timepoints
         }
         try:
-            self._parse_frameprops(self.xml['lsmframe:frameProperties'])
-            self._parse_imageprops(self.xml['lsmimage:imageProperties'])
+            self._parse_frameprops(self.xml["lsmframe:frameProperties"])
+            self._parse_imageprops(self.xml["lsmimage:imageProperties"])
         except:
-            log.error('Error parsing dimensions from %s!', self.storage['full'])
+            log.error("Error parsing dimensions from %s!", self.storage["full"])
             raise
         log.info("Parsed dimensions: %s", self._dim)
 
@@ -564,14 +567,14 @@ class ImageDataOIR(ImageDataOlympus):
         tft = lambda t, p: t.find(p, self._xmlns).text
         tfi = lambda t, p: int(tft(t, p))
 
-        log.debug('Trying to parse frameProperties XML...')
+        log.debug("Trying to parse frameProperties XML...")
         fp_root = etree.fromstring(xml)
-        img_def = fp_root.find('commonframe:imageDefinition', self._xmlns)
+        img_def = fp_root.find("commonframe:imageDefinition", self._xmlns)
 
-        self._dim['X'] = tfi(img_def, 'base:width')
-        self._dim['Y'] = tfi(img_def, 'base:height')
-        self._dim['B'] = tfi(img_def, 'base:bitCounts')
-        log.debug('[DONE] parsing frameProperties XML.')
+        self._dim["X"] = tfi(img_def, "base:width")
+        self._dim["Y"] = tfi(img_def, "base:height")
+        self._dim["B"] = tfi(img_def, "base:bitCounts")
+        log.debug("[DONE] parsing frameProperties XML.")
 
     def _parse_imageprops(self, xml):
         """Parse Z dimension from imageProperties XML.
@@ -582,33 +585,35 @@ class ImageDataOIR(ImageDataOlympus):
         """
         # TODO: implement parsing of C and T
         # XML schema instance
-        xsi = '{http://www.w3.org/2001/XMLSchema-instance}'
+        xsi = "{http://www.w3.org/2001/XMLSchema-instance}"
 
         # lambda functions for tree.find().text and int/float conversions:
         tft = lambda t, p: t.find(p, self._xmlns).text
         tfi = lambda t, p: int(tft(t, p))
 
-        log.debug('Trying to parse imageProperties XML...')
+        log.debug("Trying to parse imageProperties XML...")
         dim_z = 1  # set default to one in case this is not a z-stack
         ip_root = etree.fromstring(xml)
-        ci_acq = ip_root.find('commonimage:acquisition', self._xmlns)
-        ci_param = ci_acq.find('commonimage:imagingParam', self._xmlns)
-        ci_axis = ci_param.findall('commonparam:axis', self._xmlns)
+        ci_acq = ip_root.find("commonimage:acquisition", self._xmlns)
+        ci_param = ci_acq.find("commonimage:imagingParam", self._xmlns)
+        ci_axis = ci_param.findall("commonparam:axis", self._xmlns)
         log.debug('Found "commonparam:axis" subtree.')
         for axis in ci_axis:
-            if (axis.attrib.has_key(xsi + 'type') and
-                    axis.attrib[xsi + 'type'] == 'commonparam:ZAxisParam' and
-                    axis.attrib.has_key('enable') and
-                    axis.attrib['enable'] == 'true'):
+            if (
+                axis.attrib.has_key(xsi + "type")
+                and axis.attrib[xsi + "type"] == "commonparam:ZAxisParam"
+                and axis.attrib.has_key("enable")
+                and axis.attrib["enable"] == "true"
+            ):
                 log.debug('Found enabled axis of type "ZAxisParam".')
-                if tft(axis, 'commonparam:paramName') == 'Start End':
+                if tft(axis, "commonparam:paramName") == "Start End":
                     log.debug('Found paramName "Start End" subtree.')
-                    dim_z = tfi(axis, 'commonparam:maxSize')
-                    log.debug('Found Z-axis size: %s', dim_z)
+                    dim_z = tfi(axis, "commonparam:maxSize")
+                    log.debug("Found Z-axis size: %s", dim_z)
                     break
 
-        self._dim['Z'] = dim_z
-        log.debug('[DONE] parsing imageProperties XML.')
+        self._dim["Z"] = dim_z
+        log.debug("[DONE] parsing imageProperties XML.")
 
 
 class MosaicData(DataSet):
@@ -626,7 +631,7 @@ class MosaicData(DataSet):
         ------------------
         subvol : list(ImageData)
         """
-        super(MosaicData, self).__init__('mosaic', st_type, st_path)
+        super(MosaicData, self).__init__("mosaic", st_type, st_path)
         self.subvol = list()
 
     def add_subvol(self, img_ds):
@@ -637,7 +642,7 @@ class MosaicData(DataSet):
         img_ds : ImageData
             An ImageData object representing the subvolume.
         """
-        log.debug('Dataset type: %s', type(img_ds))
+        log.debug("Dataset type: %s", type(img_ds))
         self.subvol.append(img_ds)
 
     def files_and_coords(self, sort=False):
@@ -662,28 +667,26 @@ class MosaicData(DataSet):
         tiles = list()
         for vol in self.subvol:
             # get storage path to subvolumes, make it relative to base path:
-            fname = strip_prefix(vol.storage['full'], self.storage['path'])
+            fname = strip_prefix(vol.storage["full"], self.storage["path"])
             # always use forward slashes as path separator (works on all OS!)
-            fname = fname.replace('\\', '/')
-            pos = vol.position['relative']
+            fname = fname.replace("\\", "/")
+            pos = vol.position["relative"]
 
             try:
-                tiles.append([fname,
-                              [pos[0], pos[1], pos[2]]
-                             ])
+                tiles.append([fname, [pos[0], pos[1], pos[2]]])
             except IndexError:
-                tiles.append([fname,
-                              [pos[0], pos[1]]
-                             ])
+                tiles.append([fname, [pos[0], pos[1]]])
 
         if sort:
             # first sort by the 1st element of the coordinates, followed by
             # sorting by the 2nd element:
-            tiles = sorted(sorted(tiles, key=lambda x: x[1][0], reverse=True),
-                           key=lambda x: x[1][1], reverse=True)
+            tiles = sorted(
+                sorted(tiles, key=lambda x: x[1][0], reverse=True),
+                key=lambda x: x[1][1],
+                reverse=True,
+            )
 
         return tiles
-
 
 
 class MosaicDataCuboid(MosaicData):
@@ -709,31 +712,31 @@ class MosaicDataCuboid(MosaicData):
         }
         """
         super(MosaicDataCuboid, self).__init__(st_type, st_path)
-        log.info('Mosaic: %ix%ix%i', dim[0], dim[1], dim[2])
-        self.dim = {'X': dim[0], 'Y': dim[1], 'Z': dim[2]}
+        log.info("Mosaic: %ix%ix%i", dim[0], dim[1], dim[2])
+        self.dim = {"X": dim[0], "Y": dim[1], "Z": dim[2]}
         self.overlap = 0
-        self.overlap_units = 'px'
+        self.overlap_units = "px"
 
-    def set_overlap(self, value, units='pct'):
+    def set_overlap(self, value, units="pct"):
         """Set the overlap amount and unit."""
-        log.debug('Setting overlap to %s %s.', value, units)
-        units_allowed = ['px', 'pct', 'um', 'nm', 'mm']
+        log.debug("Setting overlap to %s %s.", value, units)
+        units_allowed = ["px", "pct", "um", "nm", "mm"]
         if units not in units_allowed:
-            raise TypeError('Unknown overlap unit given: %s' % units)
-        if units == 'pct' and value <= 5.0:
-            log.warn('Low overlap %.1f%%!', value)
-        elif units != 'pct':
+            raise TypeError("Unknown overlap unit given: %s" % units)
+        if units == "pct" and value <= 5.0:
+            log.warn("Low overlap %.1f%%!", value)
+        elif units != "pct":
             log.warn('Minimum overlap check not implemented for "%s"!', units)
         self.overlap = value
         self.overlap_units = units
 
-    def get_overlap(self, units='pct'):
+    def get_overlap(self, units="pct"):
         """Get the overlap amount in a specific unit."""
         # TODO: implement conversion for other units:
         # units_allowed = ['px', 'pct', 'um', 'nm', 'mm']
-        units_allowed = ['pct']
+        units_allowed = ["pct"]
         if units not in units_allowed:
-            raise TypeError('Unknown overlap unit requested: %s' % units)
+            raise TypeError("Unknown overlap unit requested: %s" % units)
         if units != self.overlap_units:
-            raise NotImplementedError('Unit conversion not implemented!')
+            raise NotImplementedError("Unit conversion not implemented!")
         return self.overlap
