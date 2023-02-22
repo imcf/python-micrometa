@@ -2,6 +2,7 @@
 .vscode/
 *.code-workspace
 
-# Maven build / release files
+# build / release files
 pom.xml.releaseBackup
 target/
+dist/
