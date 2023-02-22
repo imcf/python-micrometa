@@ -1,4 +1,4 @@
-# MicroMeta
+# MicroMeta 🐍 ☕ 🔬
 
 [//]: # (start-badges)
 
@@ -7,7 +7,7 @@
 [![Maven Build Status](https://travis-ci.com/imcf/python-micrometa.svg?branch=master)](https://travis-ci.com/imcf/python-micrometa)
 [![DOI](https://zenodo.org/badge/152806738.svg)](https://zenodo.org/badge/latestdoi/152806738)
 
-## Microscopy Metadata processing :coffee: :snake: :microscope:
+## Microscopy Metadata processing
 
 A Python package to process metadata from various light-microscopy related data
 formats. Supports generating [ImageJ][1] macros for stitching mosaics / tilings.
