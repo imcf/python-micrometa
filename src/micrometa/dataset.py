@@ -24,8 +24,13 @@ import io  # pylint: disable=unused-import
 
 import olefile
 
-from imcflibs.pathtools import parse_path, exists
-from imcflibs.strtools import strip_prefix
+try:
+    from imcflibs3.pathtools import parse_path, exists
+    from imcflibs3.strtools import strip_prefix
+except ImportError:
+    from imcflibs.pathtools import parse_path, exists
+    from imcflibs.strtools import strip_prefix
+
 
 from .log import LOG as log
 

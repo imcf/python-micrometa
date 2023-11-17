@@ -1,6 +1,9 @@
 """Tools to process microscopy experiment data."""
 
-from imcflibs.pathtools import parse_path
+try:
+    from imcflibs3.pathtools import parse_path
+except ImportError:
+    from imcflibs.pathtools import parse_path
 
 from .log import LOG as log
 
