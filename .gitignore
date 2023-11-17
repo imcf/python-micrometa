@@ -1,5 +1,5 @@
 # VS Code files
-.vscode/
+.vscode/.ropeproject/
 *.code-workspace
 
 # build / release files
