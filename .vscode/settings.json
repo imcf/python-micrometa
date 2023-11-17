@@ -1,0 +1,9 @@
+{
+    "black-formatter.path": [
+        "./.black-python2/bin/black"
+    ],
+    "black-formatter.args": [
+        "--target-version",
+        "py27"
+    ]
+}
