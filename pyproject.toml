@@ -9,7 +9,7 @@ version = "15.2.2"
 imcflibs = {version = "^1.4", markers = "python_version < '3'"}
 imcflibs3 = {version = "^1.4", markers = "python_version >= '3'"}
 olefile = "^0.46"
-python = [">=2.7", ">=3.6"]
+python = [">=2.7", "^3.8"]
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
