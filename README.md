@@ -4,7 +4,6 @@
 
 [//]: # (end-badges)
 
-[![Maven Build Status](https://travis-ci.com/imcf/python-micrometa.svg?branch=master)](https://travis-ci.com/imcf/python-micrometa)
 [![DOI](https://zenodo.org/badge/152806738.svg)](https://zenodo.org/badge/latestdoi/152806738)
 
 ## Microscopy Metadata processing
