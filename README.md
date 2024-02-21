@@ -4,7 +4,7 @@
 
 [//]: # (end-badges)
 
-[![DOI](https://zenodo.org/badge/152806738.svg)](https://zenodo.org/badge/latestdoi/152806738)
+[![DOI](https://zenodo.org/badge/152806738.svg)][doi]
 
 ## Microscopy Metadata processing
 
@@ -26,3 +26,4 @@ package to be provided through [PyPI][3].
 [1]: https://imagej.net
 [2]: https://imagej.net/Jython_Scripting
 [3]: https://pypi.org/
+[doi]: https://zenodo.org/badge/latestdoi/152806738
