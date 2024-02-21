@@ -10,8 +10,11 @@ readme = "README.md"
 version = "15.2.2"
 
 [tool.poetry.dependencies]
-imcflibs = {version = "^1.4", markers = "python_version < '3'"}
-imcflibs3 = {version = "^1.4", markers = "python_version >= '3'"}
+imcflibs = "^1.4"
+## in case we were to split the imcflibs package into separate versions for
+## Python 2 and 3, we could specify them like this:
+# imcflibs = {version = "^1.4", markers = "python_version < '3'"}
+# imcflibs3 = {version = "^1.4", markers = "python_version >= '3'"}
 olefile = "^0.46"
 python = [">=2.7", "^3.8"]
 
