@@ -5,10 +5,10 @@ Making a new release
 --------------------
 
 To create a new release, clone the [scijava-scripts][gh_scijava-scripts] repo
-(e.g. in `/opt/imagej/`) and run the `release-version.sh` helper:
+(e.g. in `/opt/`) and run the `release-version.sh` helper:
 
 ```bash
-BASE_DIR=/opt/imagej
+BASE_DIR=/opt
 mkdir -pv "$BASE_DIR"
 cd "$BASE_DIR"
 git clone https://github.com/scijava/scijava-scripts
