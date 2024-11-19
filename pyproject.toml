@@ -12,6 +12,9 @@ packages = [{include = "micrometa", from = "src"}]
 readme = "README.md"
 version = "${project.version}"
 
+keywords = ["fiji", "jython", "imagej", "microscopy", "metadata"]
+repository = "https://github.com/imcf/python-micrometa"
+
 [tool.poetry.dependencies]
 imcflibs = "^1.4"
 ## in case we were to split the imcflibs package into separate versions for
