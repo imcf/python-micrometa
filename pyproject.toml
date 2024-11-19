@@ -1,11 +1,14 @@
 [tool.poetry]
 authors = ["Niko Ehrenfeuchter <nikolaus.ehrenfeuchter@unibas.ch>"]
 description = "Process metadata from various light-microscopy related formats."
-name = "micrometa"
-## a package 'micrometa' already exists on PyPI, so in case we'd ever want to
-## publish it there we will need to rename /at least/ the package itself:
-# name = "imcf-micrometa"
-# packages = [{include = "micrometa", from = "src"}]
+## A package 'micrometa' already exists on PyPI, so for being able to publish
+## it there we have to rename the package itself. Note that this has some
+## potential for conflicts if someone was to install the 'micrometa' package in
+## the same venv as this one, as the paths will overlap and therefore create an
+## unpredictable mess! However, the perspective of renaming *our* package is not
+## very tempting either...
+name = "python-micrometa"
+packages = [{include = "micrometa", from = "src"}]
 readme = "README.md"
 version = "15.2.2"
 
