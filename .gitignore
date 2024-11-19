@@ -9,3 +9,6 @@ dist/
 
 # link to a custom "black" environment supporting Python2 formatting:
 .black-python2
+
+# Python venvs:
+venv/

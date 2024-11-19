@@ -10,7 +10,7 @@ description = "Process metadata from various light-microscopy related formats."
 name = "python-micrometa"
 packages = [{include = "micrometa", from = "src"}]
 readme = "README.md"
-version = "15.2.2"
+version = "${project.version}"
 
 [tool.poetry.dependencies]
 imcflibs = "^1.4"
