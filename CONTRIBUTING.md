@@ -1,8 +1,6 @@
-Development And Contributing Instructions
-=========================================
+# Development And Contributing Instructions
 
-Making a new release
---------------------
+## Making a new release
 
 To create a new release, clone the [scijava-scripts][gh_scijava-scripts] repo
 (e.g. in `/opt/`) and run the `release-version.sh` helper:
@@ -19,8 +17,7 @@ RELEASE_SCRIPT="$BASE_DIR/scijava-scripts/release-version.sh"
 $RELEASE_SCRIPT --skip-push --skip-gpg --skip-license-update
 ```
 
-Build & Deploy using Visual Studio Code
----------------------------------------
+## Build & Deploy using Visual Studio Code
 
 Building and deploying the package can be greatly simplified using "tasks" in
 [Visual Studio Code][www_vscode]. By adding the following settings to the
