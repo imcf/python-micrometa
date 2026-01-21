@@ -16,7 +16,7 @@ keywords = ["fiji", "jython", "imagej", "microscopy", "metadata"]
 repository = "https://github.com/imcf/python-micrometa"
 
 [tool.poetry.dependencies]
-imcflibs = "^1.4"
+imcflibs = [">=1.4", "<3.0"]
 ## in case we were to split the imcflibs package into separate versions for
 ## Python 2 and 3, we could specify them like this:
 # imcflibs = {version = "^1.4", markers = "python_version < '3'"}
