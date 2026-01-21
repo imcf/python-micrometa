@@ -8,7 +8,7 @@ description = "Process metadata from various light-microscopy related formats."
 ## unpredictable mess! However, the perspective of renaming *our* package is not
 ## very tempting either...
 name = "python-micrometa"
-packages = [{include = "micrometa", from = "src"}]
+packages = [{ include = "micrometa", from = "src" }]
 readme = "README.md"
 version = "${project.version}"
 
