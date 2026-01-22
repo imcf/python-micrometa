@@ -6,17 +6,19 @@ cd "$(dirname "$0")"
 
 STATUS=$(git status --porcelain)
 
-if [ -n "$STATUS" ]; then
-    echo "===================================================================="
-    echo "=============== ERROR: repository unclean, stopping! ==============="
-    echo "===================================================================="
-    echo
-    git status
-    echo
-    echo "===================================================================="
-    echo "=============== ERROR: repository unclean, stopping! ==============="
-    echo "===================================================================="
-    exit 1
+if [ -z "$RUN_ON_UNCLEAN" ]; then
+    if [ -n "$STATUS" ]; then
+        echo "==== ERROR: repository unclean, stopping! ===="
+        echo
+        git status
+        echo
+        echo "--------"
+        echo "To ignore this (you have been warned!), set an environment var:"
+        echo
+        echo "> export RUN_ON_UNCLEAN=true"
+        echo
+        exit 1
+    fi
 fi
 
 ### clean up old poetry artifacts:
