@@ -2,6 +2,17 @@
 
 # Changelog 🧾
 
+## 15.2.2
+
+Most of the changes for this version were related to publishing the package not
+only as a mavenized `.jar` on SciJava, but also as a [Python `.whl` on
+PyPI][pypi_whl] using [Poetry].
+
+### Fixes
+
+* 7e02b2e: fix ConfigParser import for Python 3
+* 73fad94: fix StringIO import for Python 3
+
 ## 15.2.1
 
 ### Fixes
@@ -25,3 +36,5 @@
 
 [python-imcflibs]: https://github.com/imcf/python-imcflibs
 [jython-olefile]: https://github.com/imcf/jython-olefile
+[pypi_whl]: https://pypi.org/project/python-micrometa/
+[Poetry]: https://python-poetry.org/
