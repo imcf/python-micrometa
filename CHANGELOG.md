@@ -4,6 +4,9 @@
 
 ## 15.2.3
 
+💡 This release includes no functional code changes, it's only about packaging
+metadata and dependencies.
+
 ### Changes
 
 * 7c8e1ab: relax constraints for [python-imcflibs] to include major release 2.x
