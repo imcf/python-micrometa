@@ -2,6 +2,12 @@
 
 # Changelog 🧾
 
+## 15.2.3
+
+### Changes
+
+* 7c8e1ab: relax constraints for [python-imcflibs] to include major release 2.x
+
 ## 15.2.2
 
 Most of the changes for this version were related to publishing the package not
